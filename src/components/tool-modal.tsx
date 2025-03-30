@@ -105,11 +105,22 @@ export function ToolModal({ toolId, content, onBack, category }: ToolModalProps)
           break;
         case 'word_tokenizer':
           const tokens = response?.result ? String(response.result).trim().split(/\s+/).filter(Boolean) : [];
-          processedResult = `${tokens.toString()}`;
+          processedResult = `${tokens.join(' ')}`;
           break;
         default:
-          const defaultResult = response?.result ? String(response.result).trim().split(/\s+/).filter(Boolean) : [];
-          processedResult = `${defaultResult.toString()}`;
+          // For 'count-words' and similar tools that return plain text results
+          if (tool.action === 'count-words' || 
+              tool.action === 'count-punctuation' || 
+              tool.action === 'average-word-lengths' ||
+              tool.action === 'average-sentence-length' ||
+              tool.action === 'most-repeated-word' ||
+              tool.action === 'least-repeated-word' ||
+              tool.action === 'count-unique-words') {
+            processedResult = String(response.result);
+          } else {
+            const defaultResult = response?.result ? String(response.result).trim().split(/\s+/).filter(Boolean) : [];
+            processedResult = `${defaultResult.join(' ')}`;
+          }
       }
       
       setResult(processedResult);
@@ -204,4 +215,4 @@ export function ToolModal({ toolId, content, onBack, category }: ToolModalProps)
       </div>
     </div>
   );
-} 
+}
