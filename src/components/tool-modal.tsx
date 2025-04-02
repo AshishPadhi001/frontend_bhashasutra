@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { ArrowLeft, Loader2 } from 'lucide-react';
+import { useState, useEffect, Fragment } from 'react';
+import { ArrowLeft, Copy, FolderDown, Loader2 } from 'lucide-react';
 import { 
   basicTools, 
   advancedTools, 
@@ -19,7 +19,7 @@ interface ToolResponse {
   result: string;
 }
 
-export function ToolModal({ toolId, content, onBack, category }: ToolModalProps) {
+export function   ToolModal({ toolId, content, onBack, category }: ToolModalProps) {
   const [result, setResult] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -35,7 +35,7 @@ export function ToolModal({ toolId, content, onBack, category }: ToolModalProps)
   
   const tool = allTools.find(t => t.id === toolId);
   
-  if (!tool) {
+  if (!tool) {            
     return (
       <div className="text-center py-12">
         <p className="text-red-500">Tool not found</p>
@@ -111,7 +111,7 @@ export function ToolModal({ toolId, content, onBack, category }: ToolModalProps)
           // For 'count-words' and similar tools that return plain text results
           if (tool.action === 'count-words' || 
               tool.action === 'count-punctuation' || 
-              tool.action === 'average-word-lengths' ||
+              tool.action === 'average-word-length' ||
               tool.action === 'average-sentence-length' ||
               tool.action === 'most-repeated-word' ||
               tool.action === 'least-repeated-word' ||
@@ -138,8 +138,21 @@ export function ToolModal({ toolId, content, onBack, category }: ToolModalProps)
     }
   }, [tool.id]);
   
+
+  const downloadFile = () => {
+    const text = result;
+    const filename = tool.action+".txt";
+    const blob = new Blob([text as string], { type: 'text/plain' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
   return (
-    <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+    <Fragment>
+      <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
       <div className="px-6 py-4 border-b border-gray-200 flex items-center bg-gray-50">
         <button
           onClick={onBack}
@@ -205,14 +218,32 @@ export function ToolModal({ toolId, content, onBack, category }: ToolModalProps)
                   dangerouslySetInnerHTML={{ __html: result }}
                 />
               ) : (
-                <pre className="text-sm text-gray-600 whitespace-pre-wrap" style={{ wordWrap: 'break-word' }}>
+                <pre className="text-sm  text-gray-600 whitespace-pre-wrap" style={{ wordWrap: 'break-word' }}>
                   {result}
                 </pre>
               )}
             </div>
           </div>
         )}
+           
       </div>
     </div>
+    <div className='flex gap-2'>
+      <button className="px-4 py-2 flex items-center gap-2 text-sm font-medium mt-3 bg-indigo-600 text-white rounded-md"
+        title='copy'
+        onClick={()=>{
+          navigator.clipboard.writeText(result as string)
+        }}  
+      >
+        <Copy size={14}/>
+      </button>
+      <button 
+        title='Download'
+        className="px-4 py-2 text-sm font-medium text-indigo-600 mt-3 transition-colors bg-indigo-600 text-white rounded-md"
+        onClick={()=>downloadFile()}  
+      > <FolderDown size={14}/>
+      </button>
+    </div>
+    </Fragment>
   );
 }
