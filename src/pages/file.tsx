@@ -211,7 +211,7 @@ export function File() {
                             </label>
                             <p className="pl-1">or drag and drop</p>
                           </div>
-                          <p className="text-xs text-gray-500">PDF, Word or TXT files up to 10MB</p>
+                          <p className="text-xs text-gray-500">PDF, Word or TXT files up to 1GB</p>
                         </>
                       )}
                     </div>
