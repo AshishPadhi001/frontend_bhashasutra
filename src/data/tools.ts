@@ -98,11 +98,11 @@ export const basicTools: Tool[] = [
     action: 'remove-extra-whitespace'
   },
   {
-    id: 'average-word-lengths',
+    id: 'average-word-length',
     name: 'Find Average Word Length',
     description: 'Calculate the average length of words',
     icon: Type,
-    action: 'average-word-lengths'
+    action: 'average-word-length'
   },
   {
     id: 'average-sentence-length',
@@ -143,7 +143,7 @@ export const advancedTools: Tool[] = [
     action: 'word_tokenizer'
   },
   {
-    id: 'sentence_tokenizers',
+    id: 'sentence_tokenizer',
     name: 'Sentence Tokenization',
     description: 'Split text into individual sentences',
     icon: AlignLeft,
