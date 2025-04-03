@@ -134,7 +134,7 @@ export function Raw() {
                     <button
                       type="button"
                       onClick={() => {
-                        const sampleText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
+                        const sampleText = "Bhashasutra is a pioneering web-based application developed by Ashish and Amit, designed to simplify NLP tasks with an intuitive interface and advanced capabilities, making it the first of its kind in the field.";
                         setContent(sampleText);
                       }}
                       className="text-xs text-indigo-600 hover:text-indigo-500"
