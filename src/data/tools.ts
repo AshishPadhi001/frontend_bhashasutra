@@ -242,7 +242,7 @@ export const sentimentTools: Tool[] = [
   {
     id: 'detailed-analysis',
     name: 'Detailed Sentiment Analysis',
-    description: 'Perform in-depth sentiment analysis including emotion detection, subjectivity analysis, and aspect-based sentiment',
+    description: 'Perform in-depth sentiment analysis including emotion detection, subjectivity analysis, and aspect-based sentiment Note : Add Multiple Sentences Not Single Sentence ',
     icon: FileBarChart,
     action: 'detailed-analysis'
   }
