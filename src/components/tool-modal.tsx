@@ -104,7 +104,7 @@ export function   ToolModal({ toolId, content, onBack, category }: ToolModalProp
         case 'wordcloud':
           const wordcloudData = response as any;
           if (wordcloudData.success && wordcloudData.image_url) {
-            processedResult = `<img src="${wordcloudData.image_url}" alt="Generated wordcloud" class="w-72 h-72 rounded-lg shadow-sm"/>`;
+            processedResult = `<img src="${wordcloudData.image_url}" alt="Generated wordcloud" class="h-72 rounded-lg shadow-sm"/>`;
           } else {
             processedResult = 'Failed to generate wordcloud';
           }
