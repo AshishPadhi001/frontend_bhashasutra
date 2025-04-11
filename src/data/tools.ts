@@ -7,7 +7,6 @@ import {
   Type, 
   Hash, 
   BarChart,
-  Replace, 
   Cloud,
   Users,
   BadgeCheck,
@@ -20,9 +19,9 @@ import {
   Languages,
   CheckCheck,
   BookOpen,
-  CloudSun,
   BarChart2,
-  Heart
+  Heart,
+  CloudSun
 } from 'lucide-react';
 
 export interface Tool {
@@ -131,6 +130,13 @@ export const basicTools: Tool[] = [
     description: 'Extract proper nouns from the text',
     icon: Users,
     action: 'extract-proper-nouns'
+  },
+  {
+    id: 'readability-score',
+    name: 'Readability Score',
+    description: 'Calculate the readability score of the text',
+    icon: BookOpen,
+    action: 'readability-score'
   }
 ];
 
@@ -197,37 +203,51 @@ export const advancedTools: Tool[] = [
     description: 'Identify and correct spelling and grammar errors',
     icon: CheckCheck,
     action: 'spell_check_and_grammar'
+  },
+  {
+    id: 'named_entity_recognition',
+    name: 'Entity Recognition',
+    description: 'Identify and classify named entities in text (people, organizations, locations, etc.)',
+    icon: Users,
+    action: 'named_entity_recognition'
+  },
+  {
+    id: 'topic_modeling',
+    name: 'Topic Modelling',
+    description: 'Extract and identify main topics and themes from the text',
+    icon: Layers,
+    action: 'topic_modeling'
   }
 ];
 
 export const visualizationTools: Tool[] = [
   {
     id: 'wordcloud',
-    name: 'Generate Word Cloud',
-    description: 'Create a word cloud visualization',
+    name: 'Word Cloud File',
+    description: 'Generate a word cloud visualization from your file',
     icon: Cloud,
     action: 'wordcloud'
   },
   {
-    id: 'frequency',
-    name: 'Word Frequency Plot',
+    id: 'frequency-plot',
+    name: 'Frequency Plot',
     description: 'Plot word frequency distribution',
     icon: BarChart,
-    action: 'frequency'
+    action: 'frequency-plot'
   },
   {
-    id: 'sentiment',
-    name: 'Sentiment Analysis Distribution Graph',
+    id: 'sentiment-graphs',
+    name: 'Sentiment Chart',
     description: 'Visualize sentiment distribution in the text',
     icon: Heart,
-    action: 'sentiment'
+    action: 'sentiment-graphs'
   },
   {
-    id: 'tfidf',
+    id: 'tfidf-heatmap',
     name: 'TF-IDF Heatmap',
     description: 'Create a heatmap of TF-IDF values',
     icon: CloudSun,
-    action: 'tfidf'
+    action: 'tfidf-heatmap'
   }
 ];
 

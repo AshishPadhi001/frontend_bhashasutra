@@ -35,8 +35,8 @@ export function Signup() {
     try {
       await signup(email, password, name);
       navigate('/login');
-    } catch (err) {
-      setError('Failed to create an account');
+    } catch (err:any) {
+      setError(err?.response?.data?.detail || 'Failed to create an account');
     }
   };
   

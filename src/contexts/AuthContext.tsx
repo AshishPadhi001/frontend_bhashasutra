@@ -69,6 +69,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setAuthToken(response.access_token);
     } catch (error) {
       console.error('Login error:', error);
+      throw error;
     } finally {
       setIsLoading(false);
     }

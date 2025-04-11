@@ -98,10 +98,16 @@ export function   ToolModal({ toolId, content, onBack, category }: ToolModalProp
           const sentimentData = response.result as any;
           processedResult = `Sentiment: ${sentimentData.sentiment}\nPolarity: ${sentimentData.polarity}\nSubjectivity: ${sentimentData.subjectivity}\nText Sample: ${sentimentData.text_sample}`;
           break;
+        case 'tfidf-heatmap':
+        case 'frequency-plot':
+        case 'sentiment-graphs':
         case 'wordcloud':
-          const image_paths = response?.result ? String(response.result).trim().split(/\s+/).filter(Boolean) : [];
-          const imageHtml = image_paths.map(path => `<img src="${path}" alt="Generated wordcloud" class="w-full h-auto rounded-lg shadow-sm mb-4"/>`).join('');
-          processedResult = imageHtml;
+          const wordcloudData = response as any;
+          if (wordcloudData.success && wordcloudData.image_url) {
+            processedResult = `<img src="${wordcloudData.image_url}" alt="Generated wordcloud" class="w-72 h-72 rounded-lg shadow-sm"/>`;
+          } else {
+            processedResult = 'Failed to generate wordcloud';
+          }
           break;
         case 'word_tokenizer':
           const tokens = response?.result ? String(response.result).trim().split(/\s+/).filter(Boolean) : [];
@@ -124,8 +130,8 @@ export function   ToolModal({ toolId, content, onBack, category }: ToolModalProp
       }
       
       setResult(processedResult);
-    } catch (err) {
-      setError('An error occurred while processing your request');
+    } catch (err:any) {
+      setError(err?.response?.data?.detail || 'An error occurred while processing your request');
       console.error(err);
     } finally {
       setLoading(false);
@@ -239,7 +245,7 @@ export function   ToolModal({ toolId, content, onBack, category }: ToolModalProp
       </button>
       <button 
         title='Download'
-        className="px-4 py-2 text-sm font-medium text-indigo-600 mt-3 transition-colors bg-indigo-600 text-white rounded-md"
+        className="px-4 py-2 text-sm font-medium mt-3 transition-colors bg-indigo-600 text-white rounded-md"
         onClick={()=>downloadFile()}  
       > <FolderDown size={14}/>
       </button>

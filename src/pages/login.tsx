@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { LogIn, User, Lock, AlertCircle } from 'lucide-react';
 import BhashaShutraLogo from '../components/Logo';
@@ -23,8 +23,8 @@ export function Login() {
     try {
       await login(username, password);
       navigate("/file", { replace: true });
-    } catch (err) {
-      setError('Invalid username or password');
+    } catch (err: any) {
+      setError(err?.response?.data?.detail || 'Invalid username or password');
     }
   };
   
